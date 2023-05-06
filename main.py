@@ -1,2 +1,2 @@
-print('test')
-print('Hello world!')
+class student:
+    print('Hi')
