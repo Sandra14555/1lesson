@@ -1,8 +1,12 @@
 class Student:
-    print('Hi')
-    def __init__(self):
-        self.height = 162
-        print('I am alive')
-        print(self)
+    amount_of_students = 0
 
-first_student = Student()
+    def __init__(self, height=160):
+
+
+
+ vasya = Student(height = 180)
+
+ mari = Student()
+ print(vasya.height, 'Vasya')
+ print(mari.height, 'Mari')
