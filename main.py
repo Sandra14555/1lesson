@@ -226,3 +226,4 @@ vasya = Human(name="Vasya")
 for day in range(1, 20):
     if vasya.life(day) == False:
         break
+        #...
