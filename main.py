@@ -1,29 +1,26 @@
-import urllib.request
-import requests
+import cv2
+from PIL import Image
 
-# opener = urllib.request.build_opener()
-#
-# response = opener.open("https://httpbin.org/get")
-#
-# print(response.read())
-# res = requests.post("https://httpbin.org/post", data="Test data hello world" , headers={"h1":"My title"})
-# print(res.text)
-#
-#
-# response = requests.get("https://httpbin.org/get")
-# print(response.text)
 
-response = requests.get("https://coinmarketcap.com/")
-response_text = response.text
+image_path = 'cat.jpeg'
+cat_face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_extended.xml')
+image = cv2.imread(image_path)
+cat_face = cat_face_cascade.detecMultiScale(image)
 
-coin_list = []
+cat = Image.open(image_path)
+glasses = Image.open('glasses.jpg')
+cat = cat.convert("RGBA")
+glasses = glasses.convert("RGBA")
 
-response_parse = response_text.split("<span>")
-for parse_elem1 in response_parse:
-    if parse_elem1.startswith("$"):
-        for parse_elem2 in parse_elem1.split("</span>"):
-            if parse_elem2.startswith("$") and parse_elem2[1].isdigit():
-                coin_list.append(parse_elem2)
+for(x, y, w, h) in cat_face:
+    glasses = glasses.resize((w, int(h/3)))
+    cat.paste(glasses, (x, int(y+h/4)), glasses)
+    cat.save("cat_with_glasses.jpg")
+    cat_with_glasses = cv2.imread('cat_with_glasses.png')
+    cv2.imshow("Cat_with_glasses", cat_with_glasses)
+    cv2.waitKey
 
-btc = coin_list[0]
-print("BTC =", btc)
+
+
+
+
